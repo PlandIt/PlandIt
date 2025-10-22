@@ -1,1 +1,3 @@
+Theme colors:
+Typography: 
 
