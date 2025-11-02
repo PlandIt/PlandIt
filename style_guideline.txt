@@ -1,3 +1,60 @@
-Theme colors: Red, White, Grey 
-Typography: 42px; Fuzzy Bublle (Caligraphy)
+PlandIt - Web Page Styling Guidelines
 
+1. General Style Principles
+  - Minimal design.
+  - Generously used whitespace to reduce cognitice load.
+  - Strong visual hierarchy.
+  - Ensure accessibility and responsiveness across all devices. 
+  - Avoid Clutter and ensure that every element has a purpose. 
+
+2. Colour Palette
+  - Primary Colour: #800000 (Dark Maroon - headers, accents)
+  - Secondary Colour: #A6192E (Deep Crimson - hover, highlights)
+  - Background: #FFFFFF (Pure White - contect background)
+  - Text Colour: #212121 (Charcoal - maint text)
+  - Border Colour: #555555 (Neutral Gray - dividers, outlines)
+  - Error Colour: #E53935 (Alert Red - errors, validation)
+  - Success Colour: #4CAF50 (Soft Green - confirmations) 
+
+3. Typography
+  - Primary Font: "Fuzzy Bubbles", cursive
+  - Secondary Font: "Roboto", sans-serif
+  - Font Weights: 400 (regular), 700 (bold)
+  - Line Height: 1.6
+  - Body Text Size: 16px
+  - Headings: H1 - 36px | H2 - 28px | H3 - 22px
+
+4. Buttons and Links
+  - Rounded corners (border radius: 8px)
+  - Default: Primary (#800000) with white text
+  - Hover: Secondary (#A6192E) background
+  - Active: Warm Brown-Red (#A52A2A)
+  - Disabled: Gray (#555555, opacity 0.5)
+  - Use uppercase for action buttons
+  - Avoid underlines on links unless in text content
+
+5. Layout and Spacing 
+  - Max content width: 1200px
+  - Section padding: 60px top/botton
+  - Card margins: 20px
+  - Grid-based alignment (Flexbox or CSS Grid)
+  - Consistent 8px spacing increments
+
+6. Images and Icons
+  - Optimize images for web (<= 500KB)
+  - Use SVGs for icons where possible
+  - ALways include alt text for accessibility
+
+7. JavaScript
+  - Use event listners instead of inline onclick attributes
+  - Keep interactivity lightweight and fast
+  - Validate forms on both front-end and back-end
+  - Follow naming cnventions
+
+8. Accessibility 
+  - Follow WCAG 2.1 AA compliance
+  - Never rely solely on colour for meaning (ICONS AND TEXT!!)
+  - Maintain logical tab order and focus states
+  - Provide clear error and success feedback
+
+END OF GUIDELINES
