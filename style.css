@@ -1,8 +1,65 @@
+body {
+  margin: 0; 
+}
 
 h1 {
-  font-size: 42px
-   font-famly: fuzzy bubbles;
+  font-size: 50px
    text-align:center;
-    margin:auto;
+  color: darkred;
 }
-  
+
+.titlebox {
+  padding-top: 150px;
+  text-align: center;
+}
+
+.toptext{
+    margin-bottom: 0px;
+}
+
+.container{
+  height: 100px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.calendarbox{
+  border: 1px solid black;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+}
+
+.rectangle_bar {
+  width: 150px;
+  height: 5px;
+  background-color: grey;
+  margin: 0 auto 20px auto;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #8f001A;
+}
+
+ul li {
+  float: left;
+  text-align: left;
+}
+
+ul li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
