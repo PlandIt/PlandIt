@@ -17,7 +17,7 @@ PlandIt - Web Page Styling Guidelines
   - Success Colour: #4CAF50 (Soft Green - confirmations) 
 
 3. Typography
-  - Primary Font: "Fuzzy Bubbles", cursive
+  - Primary Font: "Fuzzy Bubbles", cursive, address HTML (URL): <link href='https://fonts.googleapis.com/css?family=Fuzzy+Bubbles' rel='stylesheet'> 
   - Secondary Font: "Roboto", sans-serif
   - Font Weights: 400 (regular), 700 (bold)
   - Line Height: 1.6
