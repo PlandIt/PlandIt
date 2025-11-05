@@ -5,46 +5,201 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PlandIt • Product Features</title>
   <style>
-    :root{--uo-garnet:#8a0f0a;--uo-garnet-700:#6f0c08;--uo-sand:#f7f4f1;--uo-stone:#e9e4df;
-      --uo-ink:#1f1f1f;--uo-ink-60:#6b6b6b;--uo-surface:#ffffff;--uo-grid:#efefef;--accent:#0a7ea4;
-      --shadow:0 1px 3px rgba(0,0,0,.1)}
-    .theme-dark{--uo-sand:#111213;--uo-stone:#2a2a2a;--uo-surface:#1b1b1c;--uo-ink:#e8e8e8;--uo-ink-60:#a1a1a1;--uo-grid:#2b2b2b;--shadow:0 1px 3px rgba(0,0,0,.35)}
-    *{box-sizing:border-box}
-    body{margin:0;font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial;background:var(--uo-sand);color:var(--uo-ink)}
-    a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
-    .navbar{background:var(--uo-garnet);color:#fff;box-shadow:var(--shadow)}
-    .nav_container{max-width:1100px;margin:0 auto;padding:10px 16px}
-    .navbar ul{margin:0;padding:0;list-style:none;display:flex;gap:20px}
-    .navbar a{color:#fff;font-weight:600}
-    header.pagebar{background:var(--uo-surface);border-bottom:1px solid var(--uo-stone)}
-    .pagebar__inner{max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px}
-    .brand{font-weight:800;color:var(--uo-garnet);font-size:20px}
-    .spacer{flex:1}
-    .btn{border:1px solid var(--uo-stone);background:var(--uo-surface);color:var(--uo-ink);padding:7px 12px;border-radius:10px;cursor:pointer}
-    .btn:hover{background:#fafafa}.theme-dark .btn:hover{background:#232324}
-    .btn.primary{background:var(--uo-garnet);color:#fff;border-color:var(--uo-garnet)} .btn.primary:hover{background:var(--uo-garnet-700)}
-    .wrap{max-width:1100px;margin:18px auto;padding:0 16px;display:grid;grid-template-columns:260px 1fr;gap:18px}
-    .card{background:var(--uo-surface);border:1px solid var(--uo-stone);border-radius:12px;box-shadow:var(--shadow)}
-    .pad{padding:14px} h1,h2,h3{margin:.2em 0 .4em} h1{font-size:28px} h2{font-size:20px} h3{font-size:16px;color:var(--uo-ink-60)}
-    p{margin:.4em 0}.muted{color:var(--uo-ink-60)}
-    .toc li{margin:4px 0}.toc a{display:block;padding:6px 8px;border-radius:8px}.toc a:hover{background:#f1f1f1}.theme-dark .toc a:hover{background:#202022}
-    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}@media(max-width:880px){.wrap{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}
-    .feature{padding:12px;border:1px solid var(--uo-stone);border-radius:12px}
-    .tag{display:inline-block;font-size:12px;padding:2px 8px;border-radius:999px;background:#f0f7fb;color:#0a7ea4;margin-left:8px}.theme-dark .tag{background:#10212a}
-    .kbd{font:12px/1.2 ui-monospace,SFMono-Regular,Consolas,monospace;background:#f3f3f3;padding:2px 6px;border:1px solid var(--uo-stone);border-bottom-width:2px;border-radius:6px}.theme-dark .kbd{background:#1f1f20}
-    .list{padding-left:18px}.ok{color:#198754;font-weight:600}.warn{color:#8a0f0a;font-weight:600}
-    .foot{margin:28px 0 10px;text-align:center;color:var(--uo-ink-60)}
+    :root {
+      --uo-garnet: #8a0f0a;
+      --uo-garnet-700: #6f0c08;
+      --uo-sand: #f7f4f1;
+      --uo-stone: #e9e4df;
+      --uo-ink: #1f1f1f;
+      --uo-ink-60: #6b6b6b;
+      --uo-surface: #ffffff;
+      --uo-grid: #efefef;
+      --accent: #0a7ea4;
+      --shadow: 0 1px 3px rgba(0, 0, 0, .1);
+    }
+
+    .theme-dark {
+      --uo-sand: #111213;
+      --uo-stone: #2a2a2a;
+      --uo-surface: #1b1b1c;
+      --uo-ink: #e8e8e8;
+      --uo-ink-60: #a1a1a1;
+      --uo-grid: #2b2b2b;
+      --shadow: 0 1px 3px rgba(0, 0, 0, .35);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font: 15px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Arial;
+      background: var(--uo-sand);
+      color: var(--uo-ink);
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .navbar {
+      background: var(--uo-garnet);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .nav_container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 10px 16px;
+    }
+
+    .navbar ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .navbar a {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    header.pagebar {
+      background: var(--uo-surface);
+      border-bottom: 1px solid var(--uo-stone);
+    }
+
+    .pagebar__inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand {
+      font-weight: 800;
+      color: var(--uo-garnet);
+      font-size: 20px;
+    }
+
+    .spacer { flex: 1; }
+
+    .btn {
+      border: 1px solid var(--uo-stone);
+      background: var(--uo-surface);
+      color: var(--uo-ink);
+      padding: 7px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .btn:hover { background: #fafafa; }
+    .theme-dark .btn:hover { background: #232324; }
+
+    .btn.primary {
+      background: var(--uo-garnet);
+      color: #fff;
+      border-color: var(--uo-garnet);
+    }
+
+    .btn.primary:hover { background: var(--uo-garnet-700); }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 18px auto;
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--uo-surface);
+      border: 1px solid var(--uo-stone);
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .pad { padding: 14px; }
+    h1, h2, h3 { margin: .2em 0 .4em; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 20px; }
+    h3 { font-size: 16px; color: var(--uo-ink-60); }
+    p { margin: .4em 0; }
+    .muted { color: var(--uo-ink-60); }
+
+    .toc li { margin: 4px 0; }
+    .toc a {
+      display: block;
+      padding: 6px 8px;
+      border-radius: 8px;
+    }
+
+    .toc a:hover { background: #f1f1f1; }
+    .theme-dark .toc a:hover { background: #202022; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    @media(max-width: 880px) {
+      .wrap { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    .feature {
+      padding: 12px;
+      border: 1px solid var(--uo-stone);
+      border-radius: 12px;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: #f0f7fb;
+      color: #0a7ea4;
+      margin-left: 8px;
+    }
+
+    .theme-dark .tag { background: #10212a; }
+
+    .kbd {
+      font: 12px/1.2 ui-monospace, SFMono-Regular, Consolas, monospace;
+      background: #f3f3f3;
+      padding: 2px 6px;
+      border: 1px solid var(--uo-stone);
+      border-bottom-width: 2px;
+      border-radius: 6px;
+    }
+
+    .theme-dark .kbd { background: #1f1f20; }
+
+    .list { padding-left: 18px; }
+    .ok { color: #198754; font-weight: 600; }
+    .warn { color: #8a0f0a; font-weight: 600; }
+
+    .foot {
+      margin: 28px 0 10px;
+      text-align: center;
+      color: var(--uo-ink-60);
+    }
   </style>
 </head>
 <body>
   <nav class="navbar">
-  <div class="nav_container">
-    <ul>
-      <li><a href="./calendar.html">Calendar</a></li>
-      <li><a href="./productbutton.html">Product Features</a></li>
-    </ul>
-  </div>
-</nav>
+    <div class="nav_container">
+      <ul>
+        <li><a href="./calendar.html">Calendar</a></li>
+        <li><a href="./productbutton.html">Product Features</a></li>
+      </ul>
+    </div>
+  </nav>
 
   <header class="pagebar">
     <div class="pagebar__inner">
@@ -78,7 +233,11 @@
         <div class="feature">
           <h3>Month view</h3>
           <p>Clean month grid with coloured event chips. Click any day to create a new event pre-filled with that date.</p>
-          <ul class="list"><li>Mini calendar to jump months/days</li><li>Prev / Today / Next controls</li><li>uOttawa Garnet palette</li></ul>
+          <ul class="list">
+            <li>Mini calendar to jump months/days</li>
+            <li>Prev / Today / Next controls</li>
+            <li>uOttawa Garnet palette</li>
+          </ul>
         </div>
         <div class="feature">
           <h3>Week view</h3>
@@ -94,7 +253,9 @@
 
       <h2 id="shortcuts" style="margin-top:14px">Keyboard Shortcuts <span class="tag">Power user</span></h2>
       <ul class="list">
-        <li><span class="kbd">W</span> Week</li><li><span class="kbd">M</span> Month</li><li><span class="kbd">T</span> Today</li>
+        <li><span class="kbd">W</span> Week</li>
+        <li><span class="kbd">M</span> Month</li>
+        <li><span class="kbd">T</span> Today</li>
         <li><span class="kbd">← / →</span> Previous / Next</li>
         <li><span class="kbd">D, Y, A, X</span> (coming soon: Day, Year, Agenda, 4-day)</li>
       </ul>
@@ -106,12 +267,18 @@
       </div>
 
       <h2 id="privacy" style="margin-top:14px">Privacy & Storage <span class="tag">Local-first</span></h2>
-      <ul class="list"><li>Works offline; stored in your browser (<strong>localStorage</strong>)</li><li>Clearing site data removes events (ICS export on roadmap)</li></ul>
+      <ul class="list">
+        <li>Works offline; stored in your browser (<strong>localStorage</strong>)</li>
+        <li>Clearing site data removes events (ICS export on roadmap)</li>
+      </ul>
 
       <h2 id="roadmap" style="margin-top:14px">Roadmap</h2>
       <ul class="list">
-        <li>Drag to move/resize events</li><li>Import/Export (.ics)</li><li>Multiple calendars & colours</li>
-        <li>Optional Google Calendar sync</li><li>Tasks integration (dated tasks on calendar)</li>
+        <li>Drag to move/resize events</li>
+        <li>Import/Export (.ics)</li>
+        <li>Multiple calendars & colours</li>
+        <li>Optional Google Calendar sync</li>
+        <li>Tasks integration (dated tasks on calendar)</li>
       </ul>
 
       <h2 id="faq" style="margin-top:14px">FAQ</h2>
@@ -125,20 +292,36 @@
 
   <script>
     // Theme toggle (same as calendar)
-    const themeKey='plandit_theme';
-    const btn=document.getElementById('themeBtn');
-    function applyTheme(mode){
-      if(mode==='dark'){ document.body.classList.add('theme-dark'); btn.textContent='🌙'; btn.setAttribute('aria-pressed','true'); }
-      else { document.body.classList.remove('theme-dark'); btn.textContent='☀'; btn.setAttribute('aria-pressed','false'); }
+    const themeKey = 'plandit_theme';
+    const btn = document.getElementById('themeBtn');
+
+    function applyTheme(mode) {
+      if (mode === 'dark') {
+        document.body.classList.add('theme-dark');
+        btn.textContent = '🌙';
+        btn.setAttribute('aria-pressed', 'true');
+      } else {
+        document.body.classList.remove('theme-dark');
+        btn.textContent = '☀';
+        btn.setAttribute('aria-pressed', 'false');
+      }
       localStorage.setItem(themeKey, mode);
     }
-    (function init(){
-      const saved=localStorage.getItem(themeKey);
-      if(saved){ applyTheme(saved); }
-      else { const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches; applyTheme(prefersDark?'dark':'light'); }
-      btn.addEventListener('click', ()=>{ const cur=document.body.classList.contains('theme-dark')?'dark':'light'; applyTheme(cur==='dark'?'light':'dark'); });
+
+    (function init() {
+      const saved = localStorage.getItem(themeKey);
+      if (saved) {
+        applyTheme(saved);
+      } else {
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(prefersDark ? 'dark' : 'light');
+      }
+
+      btn.addEventListener('click', () => {
+        const isDark = document.body.classList.contains('theme-dark');
+        applyTheme(isDark ? 'light' : 'dark');
+      });
     })();
   </script>
 </body>
 </html>
-
