@@ -5,120 +5,130 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PlandIt • Home</title>
 
-  <!-- Use a relative path so it works locally -->
+  <!-- Your site CSS (keep your existing styles) -->
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/png" href="LOGO.png">
 
-  <!-- Add styles just for the preview card -->
+  <!-- Preview card styles (new) -->
   <style>
     :root{
-      --card-bg:#ffffff;
-      --card-border:#e6e6e6;
-      --card-shadow:0 8px 24px rgba(0,0,0,.08);
-      --ink:#222;
-    }
-    .navbar{background:#8f001A; color:#fff;}
-    .navbar .nav_container{max-width:1100px; margin:0 auto; padding:8px 16px;}
-    .navbar ul{list-style:none; margin:0; padding:0; display:flex; gap:20px}
-    .navbar a{color:#fff; text-decoration:none; font-weight:600}
-
-    .titlebox{padding-top:48px; text-align:center}
-    .rectangle_bar {
-      width: 150px; height: 5px; background-color: grey;
-      margin: 12px auto 24px auto; border-radius: 999px;
+      --uo-garnet:#8f001A;     /* uOttawa garnet to match your palette */
+      --uo-garnet-700:#6f0c08;
+      --ink:#1f1f1f;
+      --stone:#e9e4df;
+      --surface:#ffffff;
     }
 
-    /* --- Calendar preview card --- */
-    .calendar-preview {
-      max-width:1100px;
-      margin: 24px auto 48px auto;
-      background:var(--card-bg);
-      border:1px solid var(--card-border);
+    /* Page wrapper so the card sits under your title */
+    .home-wrap{ max-width:1100px; margin:0 auto; padding:24px 16px; }
+
+    /* Calendar preview card */
+    .cp-card{
+      position:relative;
+      border:1px solid var(--stone);
+      background:var(--surface);
       border-radius:16px;
-      box-shadow:var(--card-shadow);
+      box-shadow:0 6px 22px rgba(0,0,0,.08);
       overflow:hidden;
+      margin:32px auto;
+      max-width:980px;
+      height:420px;            /* preview height */
     }
-    .cp-header{
+
+    .cp-head{
+      position:absolute; inset:0 0 auto 0; height:46px;
       display:flex; align-items:center; justify-content:space-between;
-      padding:12px 16px; background:#fafafa; border-bottom:1px solid var(--card-border);
+      padding:8px 12px 8px 14px;
+      background:linear-gradient(to bottom, rgba(0,0,0,.06), rgba(0,0,0,0));
+      pointer-events:none;     /* lets clicks pass to iframe except on buttons */
     }
-    .cp-title{font-weight:700; color:var(--ink)}
-    .cp-expand{
+
+    .cp-title{
+      font:600 14px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:#555;
+      letter-spacing:.3px;
+    }
+
+    .cp-actions{ pointer-events:auto; } /* re-enable on the button */
+    .cp-btn{
       display:inline-flex; align-items:center; gap:8px;
-      padding:6px 10px; border:1px solid var(--card-border);
-      border-radius:10px; background:#fff; color:var(--ink);
+      border:1px solid var(--stone);
+      background:#fff;
+      color:var(--uo-garnet);
+      padding:6px 10px;
+      border-radius:10px;
       text-decoration:none;
+      font-weight:600;
+      transition:.15s ease;
     }
-    .cp-expand:hover{background:#f1f1f1}
-    .cp-body{
-      position:relative; height:520px; /* preview window height */
-      overflow:hidden; background:#fff;
-    }
+    .cp-btn:hover{ background:#fafafa; border-color:#ddd; }
+    .cp-btn svg{ width:16px; height:16px; }
+
+    /* The embedded preview */
     .cp-frame{
-      position:absolute; inset:0; width:100%; height:100%;
+      width:100%; height:100%;
       border:0;
-      /* keep preview non-interactive so users use the buttons/links */
+      border-radius:16px;
+      /* Preview feel: don’t interact inside the iframe, use the button to open */
       pointer-events:none;
+      filter: saturate(0.95) contrast(0.98);
     }
-    /* optional soft fade at the bottom edge */
-    .cp-fade{
-      position:absolute; left:0; right:0; bottom:0; height:48px;
-      background:linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,.9));
-      pointer-events:none;
-    }
-    .cp-footer{
-      padding:12px 16px; background:#fafafa; border-top:1px solid var(--card-border);
-      display:flex; justify-content:flex-end;
-    }
-    .cp-open-btn{
-      display:inline-block; padding:8px 14px; border-radius:10px;
-      background:#8f001A; color:#fff; text-decoration:none; font-weight:600;
-    }
-    .cp-open-btn:hover{background:#6f0c08}
+
+    /* Keep your title box centered as before */
+    .titlebox{ padding-top: 80px; text-align:center; } /* a bit less top space */
   </style>
 </head>
 <body>
-  <!-- Top nav -->
-  <nav class="navbar">
-    <div class="nav_container">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="team.html">About Us</a></li>
-        <li><a href="ProductFeatures.html">Product Features</a></li>
-      </ul>
-    </div>
+
+  <!-- (Optional) simple top nav — keep or remove based on your site -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="team.html">About Us</a></li>
+      <li><a href="ProductFeatures.html">Product Features</a></li>
+    </ul>
   </nav>
 
-  <!-- Title -->
+  <!-- Your existing title -->
   <div class="titlebox">
-    <h1 class="toptext" style="font-size:50px; color:darkred; margin:0;">PlandIt</h1>
-    <div class="rectangle_bar"></div>
-    <h2 class="bottomtext" style="font-size:40px; color:grey; margin:0;">uOttawa</h2>
+    <h1 class="toptext">PlandIt</h1>
+    <h2 class="bottomtext">uOttawa</h2>
   </div>
 
-  <!-- Calendar preview card -->
-  <section class="calendar-preview" aria-label="Calendar preview">
-    <div class="cp-header">
-      <div class="cp-title">Your Calendar (preview)</div>
-      <!-- Fullscreen/expand button -->
-      <a class="cp-expand" href="calendar.html" title="Open full calendar" aria-label="Open full calendar">
-        <!-- Diagonal arrows icon (SVG) -->
-        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
-          <path fill="currentColor"
-            d="M14 3h7v7h-2V6.41l-6.29 6.3-1.42-1.42 6.3-6.29H14V3zm-4 18H3v-7h2v3.59l6.29-6.3 1.42 1.42-6.3 6.29H10V21z"/>
-        </svg>
-        Open
-      </a>
+  <div class="home-wrap">
+    <!-- Calendar preview card -->
+    <div class="cp-card">
+      <div class="cp-head">
+        <div class="cp-title">Calendar preview</div>
+
+        <!-- Fullscreen / open button -->
+        <!-- If your calendar is in /PlandIt/, change href to "/PlandIt/calendar.html" -->
+        <div class="cp-actions">
+          <a class="cp-btn" href="calendar.html">
+            Open&nbsp;Calendar
+            <!-- “Expand / fullscreen” icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M14 10V4h6"/>
+              <path d="M10 14H4v6"/>
+              <path d="M14 4l6 6"/>
+              <path d="M4 20l6-6"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Live preview of your calendar (non-interactive) -->
+      <!-- If your calendar is in /PlandIt/, change src to "/PlandIt/calendar.html" -->
+      <iframe class="cp-frame" src="calendar.html"></iframe>
     </div>
-    <div class="cp-body">
-      <!-- Important: calendar.html must be in the SAME folder -->
-      <iframe class="cp-frame" src="calendar.html" loading="lazy" title="Calendar preview"></iframe>
-      <div class="cp-fade"></div>
+
+    <!-- Your original “Calendar” button (kept) -->
+    <div class="container">
+      <a class="calendarbox" href="calendar.html">Calendar</a>
     </div>
-    <div class="cp-footer">
-      <a class="cp-open-btn" href="calendar.html">Open Calendar</a>
-    </div>
-  </section>
+  </div>
+
 </body>
 </html>
+
 
