@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PlandIt • Home</title>
 
+  <!-- keep your existing site css if you have it -->
   <link rel="stylesheet" href="/PlandIt/style.css">
 
   <style>
@@ -14,8 +15,8 @@
       --uo-sand:#f7f4f1;
       --uo-ink:#1f1f1f;
       --card-bg:#ffffff;
-      --card-shadow:0 8px 24px rgba(0,0,0,.08);
       --border:#e5e5e5;
+      --shadow:0 10px 28px rgba(0,0,0,.10);
     }
 
     body{ background:#fff; color:var(--uo-ink); }
@@ -25,44 +26,54 @@
     .navbar ul{ list-style:none; margin:0; padding:0; display:flex; gap:20px }
     .navbar a{ color:#fff; text-decoration:none; font-weight:600 }
 
-    .titlebox{ padding:40px 16px 10px; text-align:center; }
-    .titlebox h1{ margin:0; font-size:48px; color:#8a0f0a; }
-    .titlebox h2{ margin:6px 0 0; font-size:26px; color:#777; }
+    .titlebox{ padding:36px 16px 8px; text-align:center; }
+    .titlebox h1{ margin:0; font-size:56px; color:#8a0f0a; }
+    .titlebox h2{ margin:8px 0 0; font-size:24px; color:#777; }
 
-    /* Smaller preview */
-    .preview-wrap{ display:flex; justify-content:center; padding:18px 16px 40px; }
+    /* Preview card */
+    .preview-wrap{ display:flex; justify-content:center; padding:22px 16px 60px; }
     .preview-card{
       position:relative;
-      width:min(720px, 92vw);    /* << smaller width */
+      width:min(940px, 94vw);
       background:var(--card-bg);
       border:1px solid var(--border);
-      border-radius:18px;
-      box-shadow:var(--card-shadow);
+      border-radius:20px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
     }
     .preview-head{
       display:flex; align-items:center; justify-content:space-between;
-      padding:10px 12px; border-bottom:1px solid var(--border);
-      background:#fafafa; border-top-left-radius:18px; border-top-right-radius:18px;
-      font-weight:700; color:#3a3a3a;
+      padding:12px 14px; border-bottom:1px solid var(--border);
+      background:#fafafa; font-weight:700; color:#333;
     }
     .preview-open{
       display:inline-flex; align-items:center; gap:8px;
-      padding:6px 9px; border:1px solid var(--border);
+      padding:7px 10px; border:1px solid var(--border);
       border-radius:10px; background:#fff; cursor:pointer; text-decoration:none; color:#1f1f1f;
       font-weight:600;
     }
     .preview-open:hover{ background:#f3f3f3 }
 
     .iframe-box{
-      height:300px;              /* << smaller height */
+      position:relative;
+      height:440px;              /* bigger so it doesn't look squished */
       overflow:hidden;
-      border-bottom-left-radius:18px; border-bottom-right-radius:18px;
+      background:#fff;
     }
     .iframe-box iframe{
-      width:100%; height:100%; border:0; overflow:hidden;
+      width:100%; height:100%;
+      border:0; overflow:hidden;
     }
 
-    /* Hide old bottom calendar button if present in your CSS */
+    /* Transparent mask makes preview NON-interactive */
+    .preview-mask{
+      position:absolute; inset:0;
+      pointer-events:auto;               /* capture clicks so calendar doesn't */
+      background:transparent;
+      cursor:default;
+    }
+
+    /* Hide any old bottom “Calendar” button section from old CSS if it exists */
     .container, .calendarbox { display:none !important; }
   </style>
 </head>
@@ -83,12 +94,11 @@
     <h2 class="bottomtext">uOttawa</h2>
   </div>
 
-  <!-- SMALL CALENDAR PREVIEW -->
+  <!-- CALENDAR PREVIEW (non-interactive) -->
   <section class="preview-wrap">
     <div class="preview-card" aria-label="Calendar preview">
       <div class="preview-head">
         <span>Calendar</span>
-        <!-- full-screen arrows button → goes to calendar.html -->
         <a class="preview-open" href="calendar.html" title="Open full calendar">
           <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M7 3H3v4h2V5h2V3zm12 0h-4v2h2v2h2V3zM5 17H3v4h4v-2H5v-2zm14 2h-2v2h4v-4h-2v2z" fill="currentColor"/>
@@ -96,12 +106,14 @@
           Open
         </a>
       </div>
+
       <div class="iframe-box">
         <iframe src="calendar.html" scrolling="no"></iframe>
+        <!-- This layer blocks interaction with the embedded calendar -->
+        <div class="preview-mask" aria-hidden="true"></div>
       </div>
     </div>
   </section>
 
 </body>
 </html>
-
