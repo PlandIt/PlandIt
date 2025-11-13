@@ -8,3 +8,55 @@
 </head>
 <body></body>
 </html>
+<body>
+
+  <div class="settings-container">
+    <h1>Settings</h1>
+
+    <div class="setting-item">
+      <span>Dark Mode</span>
+      <label class="switch">
+        <input type="checkbox" id="themeToggle">
+        <span class="slider round"></span>
+      </label>
+    </div>
+
+    </div>
+
+  <script>
+    // Wait for the page to be fully loaded
+    document.addEventListener('DOMContentLoaded', () => {
+
+      const themeToggle = document.getElementById('themeToggle');
+      const htmlElement = document.documentElement; // This is the <html> tag
+      
+      // --- 1. Function to apply the theme ---
+      function setTheme(theme) {
+        if (theme === 'dark') {
+          htmlElement.setAttribute('data-theme', 'dark');
+          themeToggle.checked = true;
+          localStorage.setItem('theme', 'dark'); // Save choice
+        } else {
+          htmlElement.setAttribute('data-theme', 'light');
+          themeToggle.checked = false;
+          localStorage.setItem('theme', 'light'); // Save choice
+        }
+      }
+
+      // --- 2. Check saved theme on Page Load ---
+      const savedTheme = localStorage.getItem('theme') || 'light'; // Default to light
+      setTheme(savedTheme);
+
+      // --- 3. Add click listener to the toggle ---
+      themeToggle.addEventListener('change', () => {
+        if (themeToggle.checked) {
+          setTheme('dark');
+        } else {
+          setTheme('light');
+        }
+      });
+
+    });
+  </script>
+
+</body>
