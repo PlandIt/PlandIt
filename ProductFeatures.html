@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PlandIt • Product Features</title>
+    <link rel="stylesheet" href="style.css">
     <style>
         :root {
             --uo-garnet: #8a0f0a;
@@ -46,31 +47,6 @@
 
         a:hover {
             text-decoration: underline;
-        }
-
-        .navbar {
-            background: var(--uo-garnet);
-            color: #fff;
-            box-shadow: var(--shadow);
-        }
-
-        .nav_container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 10px 16px;
-        }
-
-        .navbar ul {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            display: flex;
-            gap: 20px;
-        }
-
-        .navbar a {
-            color: #fff;
-            font-weight: 600;
         }
 
         header.pagebar {
@@ -252,7 +228,10 @@
     <nav class="navbar">
         <div class="nav_container">
             <ul>
-                <li><a href="./productbutton.html">Product Features</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="team.html">About Us</a></li>
+                <li><a href="ProductFeatures.html">Product Features</a></li>
+                <li><a href="calendar.html">Calendar</a></li>
             </ul>
         </div>
     </nav>
@@ -366,37 +345,40 @@
     </main>
 
     <script>
-        // Theme toggle (same as calendar)
-        const themeKey = 'plandit_theme';
-        const btn = document.getElementById('themeBtn');
+        var themeKey = 'plandit_theme';
+        var btn = document.getElementById('themeBtn');
 
-        function applyTheme(mode) {
-            if (mode === 'dark') {
-                document.body.classList.add('theme-dark');
+        function applyTheme(theme) {
+            var body = document.body;
+            if (theme === 'dark') {
+                body.classList.add('theme-dark');
                 btn.textContent = '🌙';
                 btn.setAttribute('aria-pressed', 'true');
             } else {
-                document.body.classList.remove('theme-dark');
+                body.classList.remove('theme-dark');
                 btn.textContent = '☀';
                 btn.setAttribute('aria-pressed', 'false');
             }
-            localStorage.setItem(themeKey, mode);
+            localStorage.setItem(themeKey, theme);
         }
 
-        (function init() {
-            const saved = localStorage.getItem(themeKey);
+        function initTheme() {
+            var saved = localStorage.getItem(themeKey);
             if (saved) {
                 applyTheme(saved);
             } else {
-                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                var prefersDark = window.matchMedia && 
+                                 window.matchMedia('(prefers-color-scheme: dark)').matches;
                 applyTheme(prefersDark ? 'dark' : 'light');
             }
-
-            btn.addEventListener('click', () => {
-                const isDark = document.body.classList.contains('theme-dark');
+            
+            btn.onclick = function() {
+                var isDark = document.body.classList.contains('theme-dark');
                 applyTheme(isDark ? 'light' : 'dark');
-            });
-        })();
+            };
+        }
+
+        window.onload = initTheme;
     </script>
 </body>
 
