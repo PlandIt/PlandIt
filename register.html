@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PlandIt • Register</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --uo-garnet:#8f001A;
+      --uo-garnet-700:#6f0c08;
+      --uo-sand:#f7f4f1;
+      --uo-ink:#1f1f1f;
+      --card-bg:#ffffff;
+      --border:#e5e5e5;
+      --shadow:0 10px 28px rgba(0,0,0,.10);
+    }
+
+    .theme-dark {
+      --uo-sand: #111213;
+      --uo-ink: #e8e8e8;
+      --card-bg: #1b1b1c;
+      --border: #2a2a2a;
+    }
+
+    body {
+      background: var(--uo-sand);
+      color: var(--uo-ink);
+    }
+
+    .register-container {
+      max-width: 400px;
+      margin: 60px auto;
+      padding: 30px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .register-title {
+      text-align: center;
+      color: var(--uo-garnet);
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--uo-ink);
+      font-weight: 500;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      background: var(--uo-garnet);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background: var(--uo-garnet-700);
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .login-link a {
+      color: var(--uo-garnet);
+      text-decoration: none;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav_container">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="team.html">About Us</a></li>
+        <li><a href="ProductFeatures.html">Product Features</a></li>
+        <li><a href="calendar.html">Calendar</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div style="position: fixed; top: 20px; right: 20px;">
+    <button class="btn" id="themeBtn" title="Toggle theme" aria-pressed="false">☀️</button>
+  </div>
+
+  <div class="register-container">
+    <h1 class="register-title">Create Your Account</h1>
+    <form id="registerForm">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" required placeholder="Enter your first name">
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" required placeholder="Enter your last name">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" required placeholder="Enter your email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" required placeholder="Enter your password">
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" required placeholder="Confirm your password">
+      </div>
+      <button type="submit" class="submit-btn">Finish Up</button>
+    </form>
+    <div class="login-link">
+      <p>Already have an account? <a href="login.html">Login here</a></p>
+    </div>
+  </div>
+
+  <script>
+    function checkPassword(pwd) {
+      return pwd.length >= 8 && 
+             /[0-9]/.test(pwd) && 
+             /[A-Z]/.test(pwd);
+    }
+
+    var form = document.getElementById('registerForm');
+    form.onsubmit = function(e) {
+      e.preventDefault();
+      var pwd = document.getElementById('password').value;
+      var confirmPwd = document.getElementById('confirmPassword').value;
+      
+      if (!checkPassword(pwd)) {
+        alert('Password requirements:\n- At least 8 characters\n- One number\n- One uppercase letter');
+        return;
+      }
+      
+      if (pwd !== confirmPwd) {
+        alert('Passwords do not match.');
+        return;
+      }
+      
+      window.location.href = 'login.html';
+    };
+
+    var themeKey = 'plandit_theme';
+    
+    function applyTheme(theme) {
+      var body = document.body;
+      var btn = document.getElementById('themeBtn');
+      
+      if (theme === 'dark') {
+        body.classList.add('theme-dark');
+        btn.textContent = '🌙';
+        btn.setAttribute('aria-pressed', 'true');
+      } else {
+        body.classList.remove('theme-dark');
+        btn.textContent = '☀️';
+        btn.setAttribute('aria-pressed', 'false');
+      }
+      localStorage.setItem(themeKey, theme);
+    }
+
+    function initTheme() {
+      var saved = localStorage.getItem(themeKey);
+      if (saved) {
+        applyTheme(saved);
+      } else {
+        var prefersDark = window.matchMedia && 
+                         window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(prefersDark ? 'dark' : 'light');
+      }
+      
+      document.getElementById('themeBtn').onclick = function() {
+        var isDark = document.body.classList.contains('theme-dark');
+        applyTheme(isDark ? 'light' : 'dark');
+      };
+    }
+
+    window.onload = initTheme;
+  </script>
+</body>
+</html>
