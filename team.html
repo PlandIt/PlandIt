@@ -3,49 +3,122 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/PlandIt/style.css">
+  <link rel="stylesheet" href="style.css">
   <title>Team Page</title>
+  <style>
+    :root {
+      --uo-garnet: #8f001A;
+      --uo-garnet-700: #6f0c08;
+      --uo-sand: #f7f4f1;
+      --uo-ink: #1f1f1f;
+      --card-bg: #ffffff;
+      --border: #e5e5e5;
+      --shadow: 0 10px 28px rgba(0,0,0,.10);
+    }
+
+    .theme-dark {
+      --uo-sand: #111213;
+      --uo-ink: #e8e8e8;
+      --card-bg: #1b1b1c;
+      --border: #2a2a2a;
+    }
+
+    body {
+      background: var(--uo-sand);
+      color: var(--uo-ink);
+    }
+
+    .flex_box {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border);
+    }
+  </style>
 </head>
 <body>
   <nav class="navbar">
-    <div class="nav_box">
+    <div class="nav_container">
       <ul>
-        <li><a href="/PlandIt/index.html">Home</a></li>
-        <li><a href="/PlandIt/team.html">About Us</a></li>
-        <li><a href="/PlandIt/ProductFeatures.html">Product Features</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="team.html">About Us</a></li>
+        <li><a href="ProductFeatures.html">Product Features</a></li>
+        <li><a href="calendar.html">Calendar</a></li>
       </ul>
     </div>
   </nav>
+
+  <!-- Add padding to body to account for fixed navbar -->
+  <div style="padding-top: 40px;"></div>
+
+  <div style="position: fixed; top: 20px; right: 20px;">
+    <button class="btn" id="themeBtn" title="Toggle theme" aria-pressed="false">☀️</button>
+  </div>
 
   <h1>Meet Our Team</h1>
   <div class="rectangle_bar"></div>
 
   <div class="flex_section">
     <div class="flex_box">
-      <h2>Member 1</h2>
+      <h2>Gurneet Kaur</h2>
       <p>Role: Co-Founder</p>
     </div>
     <div class="flex_box">
-      <h2>Member 2</h2>
+      <h2>Laouratou Diallo</h2>
       <p>Role: Co-Founder</p>
     </div>
     <div class="flex_box">
-      <h2>Member 3</h2>
+      <h2>Illias El Gaauri</h2>
       <p>Role: Co-Founder</p>
     </div>
     <div class="flex_box">
-      <h2>Member 4</h2>
+      <h2>Nicholas Hernandez</h2>
       <p>Role: Co-Founder</p>
     </div>
     <div class="flex_box">
-      <h2>Member 5</h2>
+      <h2>Damien Lan Hing Po</h2>
       <p>Role: Co-Founder</p>
     </div>
     <div class="flex_box">
-      <h2>Member 6</h2>
+      <h2>Rayan Mahdi</h2>
       <p>Role: Co-Founder</p>
     </div>
   </div>
 
+  <script>
+    var themeKey = 'plandit_theme';
+    
+    function applyTheme(theme) {
+      var body = document.body;
+      var btn = document.getElementById('themeBtn');
+      
+      if (theme === 'dark') {
+        body.classList.add('theme-dark');
+        btn.textContent = '🌙';
+        btn.setAttribute('aria-pressed', 'true');
+      } else {
+        body.classList.remove('theme-dark');
+        btn.textContent = '☀️';
+        btn.setAttribute('aria-pressed', 'false');
+      }
+      localStorage.setItem(themeKey, theme);
+    }
+
+    function initTheme() {
+      var saved = localStorage.getItem(themeKey);
+      if (saved) {
+        applyTheme(saved);
+      } else {
+        var prefersDark = window.matchMedia && 
+                         window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(prefersDark ? 'dark' : 'light');
+      }
+      
+      document.getElementById('themeBtn').onclick = function() {
+        var isDark = document.body.classList.contains('theme-dark');
+        applyTheme(isDark ? 'light' : 'dark');
+      };
+    }
+
+    window.onload = initTheme;
+  </script>
 </body>
 </html>
