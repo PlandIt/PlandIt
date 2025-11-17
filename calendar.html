@@ -39,12 +39,53 @@
     body{
       margin:0; font:14px/1.35 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial; color:var(--uo-ink); background:var(--uo-sand);
       display:flex; flex-direction:column;
+      min-height:100vh;
+      height:100vh;
+      padding-top: 50px; /* Add padding to account for fixed navbar */
     }
-    /* Top nav bar (matches your site) */
-    .navbar{background:var(--uo-garnet); color:#fff; box-shadow:var(--shadow);}
-    .navbar .nav_container{max-width:1100px; margin:0 auto; padding:8px 16px;}
-    .navbar ul{list-style:none; margin:0; padding:0; display:flex; gap:20px}
-    .navbar a{color:#fff; text-decoration:none; font-weight:600}
+
+    /* Navbar styling */
+    .navbar{ 
+      background: var(--uo-garnet, #8f001A); 
+      color: #fff;
+      box-shadow: var(--shadow, 0 1px 3px rgba(0,0,0,.1));
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      height: 50px;
+    }
+
+    .nav_container{ 
+      max-width: 1100px; 
+      margin: 0 auto; 
+      padding: 0 16px;
+      height: 100%;
+    }
+
+    .navbar ul{ 
+      list-style: none; 
+      margin: 0; 
+      padding: 0; 
+      display: flex; 
+      gap: 32px;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .navbar a{ 
+      color: #fff; 
+      text-decoration: none; 
+      font-weight: 600;
+      font-size: 16px;
+      padding: 4px 0;
+    }
+
+    .navbar a:hover {
+      text-decoration: underline;
+    }
 
     header.pagebar{background:var(--uo-surface); border-bottom:1px solid var(--uo-stone);}
     .pagebar__inner{max-width:1100px; margin:0 auto; padding:10px 16px; display:flex; align-items:center; gap:12px}
@@ -60,8 +101,36 @@
     .seg button[aria-pressed="true"]{background:var(--uo-garnet); color:#fff}
 
     /* Layout */
-    .wrap{max-width:1100px; margin:14px auto; padding:0 16px; display:grid; grid-template-columns:260px 1fr; gap:16px}
-    .card{background:var(--uo-surface); border:1px solid var(--uo-stone); border-radius:12px; box-shadow:var(--shadow)}
+    .wrap{
+      width:100%; 
+      margin:0; 
+      padding:0; 
+      display:grid; 
+      grid-template-columns:200px 1fr; 
+      gap:0;
+      flex:1;
+      height:calc(100vh - 100px);
+    }
+
+    .mini {
+      width: 200px;
+      min-width: 200px;
+    }
+
+    #mainCard {
+      flex: 1;
+      min-width: 0;
+    }
+    .card{
+      background:var(--uo-surface); 
+      border:none;
+      border-radius:0; 
+      box-shadow:none;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      overflow:auto;
+    }
 
     /* Sidebar mini calendar */
     .mini{padding:12px}
@@ -71,9 +140,37 @@
     .mini button{border:0; background:transparent; padding:6px 0; border-radius:8px; cursor:pointer; color:var(--uo-ink)}
     .mini button.today{outline:2px solid var(--uo-garnet)}
     .mini button.active{background:var(--uo-garnet); color:#fff}
+    .mini h4{margin-top:12px; margin-bottom:8px;}
+    #eventList{margin-top:8px;}
+    #eventList li{
+      background-color: var(--uo-garnet);
+      color: #fff;
+      padding: 6px 8px;
+      border-radius: 4px;
+      margin-bottom: 6px;
+      font-size: 12px;
+    }
 
     /* Month grid */
-    .toolbar{display:flex; align-items:center; gap:8px; padding:10px 12px; border-bottom:1px solid var(--uo-stone)}
+    .toolbar{
+      display:flex; 
+      align-items:center; 
+      gap:8px; 
+      padding:10px 12px; 
+      border-bottom:1px solid var(--uo-stone);
+    }
+
+    #monthView, #weekView {
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      overflow:auto;
+    }
+
+    .month {
+      flex:1;
+      min-height:600px; /* Adjust this value as needed */
+    }
     .title{font-weight:700}
     
     .month{
@@ -114,21 +211,34 @@
       flex:1;
       overflow:hidden;
     }
-    .dow-row{
+.dow-row{
     display:grid;
     grid-template-columns:repeat(7,1fr);
     align-items:center;                 /* vertical center */
-    height:var(--dow-h);                /* <-- lock header height */
+    height:calc(var(--dow-h) * 1.5);    /* <-- increase header height */
     background:#fafafa;
     border-bottom:1px solid var(--uo-stone);
   }
 .theme-dark .dow-row{ background:#1f1f20; }
-.dow-row div{ padding:6px 8px; font-size:12px; color:var(--uo-ink-60); }
+.dow-row div{ 
+    padding: 4px 8px; 
+    font-size: 12px; 
+    color: var(--uo-ink-60); 
+    line-height: 1.2; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.dow-row div span:first-child { font-weight: bold; }
+.dow-row div span:last-child { font-size: 14px; }
     .day{border-right:1px solid var(--uo-stone); border-bottom:1px solid var(--uo-stone); padding:6px; position:relative; overflow:hidden}
     .day:nth-child(7n){border-right:0}
     .day .date{position:absolute; top:6px; right:8px; font-size:12px; color:var(--uo-ink-60)}
     .day .events{margin-top:20px; display:flex; flex-direction:column; gap:4px}
-    .chip{font-size:12px; padding:2px 6px; border-radius:6px; color:#fff; background:var(--uo-accent); cursor:pointer; width:max-content}
+    .chip{font-size:12px; padding:4px 6px; border-radius:6px; color:#fff; background:var(--uo-garnet); cursor:pointer; width:100%; line-height:1.2;}
+    .chip strong{display:block;}
 
     /* Week grid */
     .weekwrap{display:grid; grid-template-columns:60px 1fr}
@@ -138,7 +248,8 @@
     .week .hline{position:relative; height:48px; border-bottom:1px solid var(--uo-grid);}
     .week .vgrid{position:absolute; inset:0; display:grid; grid-template-columns:repeat(7,1fr);}    
     .week .vgrid > div{border-right:1px solid var(--uo-stone)}
-    .event{position:absolute; left:0; right:0; padding:4px 6px; border-radius:6px; color:#fff; background:var(--uo-accent); font-size:12px; box-shadow:var(--shadow); cursor:pointer}
+    .event{position:absolute; left:0; right:0; padding:4px 6px; border-radius:6px; color:#fff; background:var(--uo-garnet); font-size:12px; box-shadow:var(--shadow); cursor:pointer; line-height:1.2;}
+    .event strong{display:block;}
 
     /* Modal */
     .modal{position:fixed; inset:0; background:rgba(0,0,0,.35); display:none; align-items:center; justify-content:center; padding:16px}
@@ -149,20 +260,66 @@
     input,select{width:100%; padding:8px 10px; border:1px solid var(--uo-stone); border-radius:8px; background:var(--uo-surface); color:var(--uo-ink)}
 
     @media (max-width: 860px){
-      .wrap{grid-template-columns:1fr}
+      .wrap{
+        grid-template-columns:1fr;
+        padding: 0;
+      }
+      .mini {
+        display: none;
+      }
+      #mainCard {
+        width: 100%;
+      }
       .weekwrap{grid-template-columns:48px 1fr}
+    }
+    /* Mascot styling */
+    #plandit-mascot {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 100px;
+      text-align: center;
+      cursor: pointer;
+      z-index: 9999;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    #mascot-bubble {
+      display: none;
+      background: #f0f4ff;
+      color: #222;
+      border-radius: 14px;
+      padding: 10px 14px;
+      font-size: 14px;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      max-width: 200px;
+    }
+
+    #plandit-mascot:hover #mascot-img {
+      transform: scale(1.1);
+      transition: transform 0.2s ease;
+    }
+
+    /* Dark theme support for mascot */
+    .theme-dark #mascot-bubble {
+      background: #2a2a2a;
+      color: #e8e8e8;
     }
   </style>
 </head>
 <body>
   <!-- Site nav to match your base page -->
   <nav class="navbar">
-  <div class="nav_container">
-    <ul>
-      <li><a href="./calendar.html">Calendar</a></li>
-    </ul>
-  </div>
-</nav>
+    <div class="nav_container">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="team.html">About Us</a></li>
+        <li><a href="ProductFeatures.html">Product Features</a></li>
+        <li><a href="calendar.html">Calendar</a></li>
+      </ul>
+    </div>
+  </nav>
 
   <header class="pagebar">
     <div class="pagebar__inner">
@@ -173,6 +330,7 @@
       <div class="title" id="rangeTitle"></div>
       <div class="spacer"></div>
       <button class="btn" id="setNameBtn" title="Set calendar owner name">Set Name</button>
+      <button class="btn" onclick="window.open('https://www.uottawa.ca/en/current-students', '_blank')" title="View exam schedule">Exam Schedule</button>
       <button class="btn" id="themeBtn" title="Toggle theme" aria-pressed="false">☀️</button>
       <div class="seg" role="group" aria-label="View switch">
         <button id="monthViewBtn" aria-pressed="true">Month</button>
@@ -188,6 +346,9 @@
       <h3 id="miniTitle"></h3>
       <div class="grid" id="miniDOW"></div>
       <div class="grid" id="miniGrid"></div>
+      <a href="https://www.uottawa.ca/library/services/reserve-study-space" target="_blank" class="btn primary" style="width: 100%; margin-top: 12px; margin-bottom: 12px; display: block; text-align: center; text-decoration: none;">Book a study room</a>
+      <h4>Upcoming Events</h4>
+      <ul id="eventList" style="list-style-type: none; padding: 0;"></ul>
     </aside>
 
     <!-- Main calendar area -->
@@ -247,50 +408,72 @@
     </div>
   </div>
 
+  <!-- Mascot -->
+  <div id="plandit-mascot">
+    <div id="mascot-bubble">Roar! I'm Planosaur. Need help with Plandit?</div>
+    <div id="mascot-img" style="font-size: 60px;">🦖</div>
+  </div>
+
   <script>
-    // ======= Utilities & storage =======
-    const $ = (id)=>document.getElementById(id);
-    const pad = (n)=> String(n).padStart(2,'0');
-    const toKey = (d)=> `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-    const getStore=(k,f)=> JSON.parse(localStorage.getItem(k)||JSON.stringify(f));
-    const setStore=(k,v)=> localStorage.setItem(k,JSON.stringify(v));
-
-    // event shape: {id, title, date:'YYYY-MM-DD', start:'HH:MM', end:'HH:MM', color, location}
-    const storeKey='plandit_events_v2';
-    const themeKey='plandit_theme';
-
-    // ======= State =======
-    const state={
-      view:'month',
-      cursor:new Date(), // reference date of current page
-      selected: new Date(), // selected date (from mini calendar)
-      editing: null // current event being edited
+    // Utils
+    var $ = function(id) { return document.getElementById(id); };
+    var pad = function(n) { return String(n).padStart(2,'0'); };
+    var toKey = function(d) { 
+      return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()); 
+    };
+    var getStore = function(k,f) { 
+      return JSON.parse(localStorage.getItem(k) || JSON.stringify(f)); 
+    };
+    var setStore = function(k,v) { 
+      localStorage.setItem(k, JSON.stringify(v)); 
     };
 
-    // ======= Theme =======
-    function applyTheme(t){
-      const body=document.body;
-      if(t==='dark'){ body.classList.add('theme-dark'); $('themeBtn').textContent='🌙'; $('themeBtn').setAttribute('aria-pressed','true'); }
-      else { body.classList.remove('theme-dark'); $('themeBtn').textContent='☀️'; $('themeBtn').setAttribute('aria-pressed','false'); }
-      localStorage.setItem(themeKey, t);
+    var storeKey = 'plandit_events_v2';
+    var themeKey = 'plandit_theme';
+
+    var state = {
+      view: 'month',
+      cursor: new Date(),
+      selected: new Date(),
+      editing: null
+    };
+
+    // Theme handling
+    function applyTheme(theme) {
+      var body = document.body;
+      var btn = $('themeBtn');
+      if (theme === 'dark') {
+        body.classList.add('theme-dark');
+        btn.textContent = '🌙';
+        btn.setAttribute('aria-pressed', 'true');
+      } else {
+        body.classList.remove('theme-dark');
+        btn.textContent = '☀️';
+        btn.setAttribute('aria-pressed', 'false');
+      }
+      localStorage.setItem(themeKey, theme);
     }
-    function initTheme(){
-      const saved=localStorage.getItem(themeKey);
-      if(saved){ applyTheme(saved); }
-      else {
-        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    function initTheme() {
+      var saved = localStorage.getItem(themeKey);
+      if (saved) {
+        applyTheme(saved);
+      } else {
+        var prefersDark = window.matchMedia && 
+                         window.matchMedia('(prefers-color-scheme: dark)').matches;
         applyTheme(prefersDark ? 'dark' : 'light');
       }
-      $('themeBtn').onclick = ()=>{
-        const cur = document.body.classList.contains('theme-dark') ? 'dark' : 'light';
-        applyTheme(cur==='dark' ? 'light' : 'dark');
+      $('themeBtn').onclick = function() {
+        var isDark = document.body.classList.contains('theme-dark');
+        applyTheme(isDark ? 'light' : 'dark');
       };
     }
 
-    // ======= Init =======
-    const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-    const DOW_FULL = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    // Calendar constants
+    var DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    var DOW_FULL = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var MONTHS = ['January','February','March','April','May','June','July',
+                 'August','September','October','November','December'];
 
     function start(){
       initTheme();
@@ -343,8 +526,33 @@
     }
 
     function renderHeaderTitles(){
-      const d=state.cursor; const title=`${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
-      $('rangeTitle').textContent= title;
+      const d = state.cursor;
+      let title;
+      
+      if (state.view === 'month') {
+        title = `${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+      } else {
+        // For week view, show date range
+        const weekStart = new Date(d);
+        weekStart.setDate(d.getDate() - d.getDay()); // Move to Sunday
+        const weekEnd = new Date(weekStart);
+        weekEnd.setDate(weekStart.getDate() + 6); // Move to Saturday
+        
+        // If week spans two months
+        if (weekStart.getMonth() !== weekEnd.getMonth()) {
+          title = `${MONTHS[weekStart.getMonth()]} ${weekStart.getDate()} - ${MONTHS[weekEnd.getMonth()]} ${weekEnd.getDate()}, ${weekEnd.getFullYear()}`;
+        } 
+        // If week spans two years
+        else if (weekStart.getFullYear() !== weekEnd.getFullYear()) {
+          title = `${MONTHS[weekStart.getMonth()]} ${weekStart.getDate()}, ${weekStart.getFullYear()} - ${MONTHS[weekEnd.getMonth()]} ${weekEnd.getDate()}, ${weekEnd.getFullYear()}`;
+        }
+        // Same month and year
+        else {
+          title = `${MONTHS[weekStart.getMonth()]} ${weekStart.getDate()}-${weekEnd.getDate()}, ${weekEnd.getFullYear()}`;
+        }
+      }
+      
+      $('rangeTitle').textContent = title;
     }
 
     // ======= Mini calendar =======
@@ -367,6 +575,32 @@
         cells.push(btn);
       }
       const grid=$('miniGrid'); grid.textContent=''; cells.forEach(b=>grid.appendChild(b));
+      renderEventList();
+    }
+
+    function renderEventList() {
+      const eventList = $('eventList');
+      eventList.innerHTML = '';
+      const events = getStore(storeKey, []);
+      const nationalHolidays = getNationalHolidays();
+      const allEvents = [...events, ...nationalHolidays].sort((a, b) => new Date(a.date) - new Date(b.date));
+      
+      allEvents.slice(0, 5).forEach(event => {
+        const li = document.createElement('li');
+        const date = new Date(event.date);
+        li.innerHTML = `<strong>${date.toLocaleDateString('en-US', {month: 'short', day: 'numeric'})}</strong>: ${event.title}`;
+        eventList.appendChild(li);
+      });
+    }
+
+    function getNationalHolidays() {
+      // This is a simplified list. You may want to use a more comprehensive holiday API or library
+      return [
+        { date: '2025-12-25', title: 'Christmas Day' },
+        { date: '2026-01-01', title: "New Year's Day" },
+        { date: '2026-07-01', title: 'Canada Day' },
+        // Add more holidays as needed
+      ];
     }
 
     // ======= Month view =======
@@ -395,7 +629,10 @@
 
         const key=toKey(d);
         events.filter(e=>e.date===key).slice(0,6).forEach(e=>{
-          const chip=document.createElement('div'); chip.className='chip'; chip.textContent=e.title; chip.style.background=e.color||'var(--uo-accent)';
+          const chip=document.createElement('div'); 
+          chip.className='chip'; 
+          chip.innerHTML = `<strong>${e.title}</strong>${e.location ? '<br>' + e.location : ''}`; 
+          chip.style.background=e.color||'var(--uo-accent)';
           chip.onclick=()=> openModal(e);
           list.appendChild(chip);
         });
@@ -415,6 +652,29 @@
     // ======= Week view =======
     function renderWeek(){
       const host=$('weekView'); host.textContent='';
+      
+      const weekStart = new Date(state.cursor);
+      weekStart.setDate(weekStart.getDate() - weekStart.getDay());  // Move to Sunday
+
+      // Add day headers
+      const headerRow = document.createElement('div');
+      headerRow.className = 'dow-row';
+      headerRow.style.marginBottom = '0';
+      // Empty cell for hours column
+      const emptyHeader = document.createElement('div');
+      emptyHeader.style.width = '60px';
+      headerRow.appendChild(emptyHeader);
+      // Day names and dates
+      const daysOrder = [1, 2, 3, 4, 5, 6, 0]; // Monday to Sunday
+      for(let i = 0; i < 7; i++) {
+        const d = new Date(weekStart);
+        d.setDate(weekStart.getDate() + daysOrder[i]);
+        const dayHeader = document.createElement('div');
+        dayHeader.innerHTML = `${DOW[daysOrder[i]]}<br>${d.getDate()}`;
+        headerRow.appendChild(dayHeader);
+      }
+      host.appendChild(headerRow);
+
       const wrap=document.createElement('div'); wrap.className='weekwrap';
       const hours=document.createElement('div'); hours.className='hours';
       for(let h=0; h<24; h++){
@@ -426,14 +686,15 @@
       for(let c=0;c<7;c++){ v.appendChild(document.createElement('div')); }
       grid.appendChild(v);
 
-      const start = new Date(state.cursor); start.setDate(start.getDate()-start.getDay());
-      const end = new Date(start); end.setDate(start.getDate()+7);
+      const start = new Date(weekStart);
+      const end = new Date(start);
+      end.setDate(start.getDate() + 7);  // Add 7 days
       const events=getStore(storeKey, []);
 
       events.forEach(e=>{
         const d=new Date(e.date);
         if(d>=start && d<end){
-          const dayIndex = (d.getDay());
+          const dayIndex = (d.getDay() + 6) % 7;  // Adjust index to start from Monday
           const top = (parseInt(e.start.slice(0,2))*60 + parseInt(e.start.slice(3))) * (48/60); // 48px per hour
           const height = ((parseInt(e.end.slice(0,2))*60 + parseInt(e.end.slice(3))) - (parseInt(e.start.slice(0,2))*60 + parseInt(e.start.slice(3)))) * (48/60);
           const ev=document.createElement('div'); ev.className='event';
@@ -442,11 +703,40 @@
           ev.style.left = `calc(${(dayIndex/7)*100}% + 4px)`;
           ev.style.right = `calc(${((6-dayIndex)/7)*100}% + 4px)`;
           ev.style.background = e.color||'var(--uo-accent)';
-          ev.textContent = `${e.title} • ${e.start}–${e.end}`;
+          ev.innerHTML = `<strong>${e.title}</strong> • ${e.start}–${e.end}${e.location ? '<br>' + e.location : ''}`;
           ev.onclick=()=> openModal(e);
           grid.appendChild(ev);
         }
       });
+
+      // Add click event to create new events
+      grid.onclick = (e) => {
+        if (e.target.classList.contains('event')) return; // Don't create new event if clicking on existing event
+        const rect = grid.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+          const dayIndex = Math.floor(x / (rect.width / 7));
+          const hour = Math.floor(y / 48);
+          const minute = Math.floor((y % 48) / 0.8);
+        
+          // Create a new date object for the clicked day
+          const newEventDate = new Date(weekStart);
+          newEventDate.setDate(weekStart.getDate() + daysOrder[dayIndex]);
+        
+        // Ensure time values are valid
+        const validMinute = Math.min(59, Math.max(0, minute));
+        const validHour = Math.min(23, Math.max(0, hour));
+        const endHour = Math.min(23, validHour + 1);
+        
+        const newEventStart = `${pad(validHour)}:${pad(validMinute)}`;
+        const newEventEnd = `${pad(endHour)}:${pad(validMinute)}`;
+        
+        openModal({
+          date: toKey(newEventDate),
+          start: newEventStart,
+          end: newEventEnd
+        });
+      };
 
       wrap.append(hours, grid); host.appendChild(wrap);
     }
@@ -503,6 +793,33 @@
 
     // start!
     start();
+
+    // Mascot helper
+    (function() {
+      var mascot = document.getElementById('plandit-mascot');
+      var bubble = document.getElementById('mascot-bubble');
+      var tips = [
+        "Need help with your calendar?",
+        "Add your exams and assignments",
+        "Try week view for detailed planning",
+        "Set your name at the top",
+        "Dark theme for night planning",
+        "Book study rooms from sidebar",
+        "Click any day to add events",
+        "Check upcoming events"
+      ];
+      
+      var visible = false;
+      mascot.onclick = function() {
+        if (visible) {
+          bubble.style.display = 'none';
+        } else {
+          bubble.style.display = 'block';
+          bubble.textContent = tips[Math.floor(Math.random() * tips.length)];
+        }
+        visible = !visible;
+      };
+    })();
 
     // ======= Owner name (personalization) =======
     function initOwner(){
