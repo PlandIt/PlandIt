@@ -32,10 +32,25 @@
   }
 </style>
 
-<scipt>
+<script>
   const mascot = document.getElementById('plandit-mascot');
   const bubble = document.getElementById('mascot-bubble');
 
   // planosaur messages
-  
-</scipt>
+  const messages = [
+    "Roar! Follow me to your calender!",
+    "Tasks piling up? Planosaur's got you!",
+    "Click 'Home' anytime to go back.",
+    "Need to check the week view? Let's stomp there!",
+    "Planning made easy with Planosaur!"
+  ];
+
+  mascot.addEventListener('click', () => {
+    if (bubble.style.display === 'block') {
+      bubble.style.display = 'none';
+    } else {
+      bubble.style.display = 'block';
+      bubble.innerText = messages[Math.floor(Math.random() * messages.length)];
+    }
+  });
+</script>
