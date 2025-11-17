@@ -6,78 +6,118 @@
   <title>PlandIt • Home</title>
 
   <!-- keep your existing site css if you have it -->
-  <link rel="stylesheet" href="/PlandIt/style.css">
+  <link rel="stylesheet" href="style.css">
 
   <style>
-    :root{
-      --uo-garnet:#8f001A;
-      --uo-garnet-700:#6f0c08;
-      --uo-sand:#f7f4f1;
-      --uo-ink:#1f1f1f;
-      --card-bg:#ffffff;
-      --border:#e5e5e5;
-      --shadow:0 10px 28px rgba(0,0,0,.10);
+    :root {
+      --uo-garnet: #8f001A;
+      --uo-garnet-700: #6f0c08;
+      --uo-sand: #f7f4f1;
+      --uo-ink: #1f1f1f;
+      --card-bg: #ffffff;
+      --border: #e5e5e5;
+      --shadow: 0 10px 28px rgba(0,0,0,.10);
     }
 
-    body{ background:#fff; color:var(--uo-ink); }
-
-    .navbar{ background:var(--uo-garnet); }
-    .navbar .nav_container{ max-width:1100px; margin:0 auto; padding:8px 16px; }
-    .navbar ul{ list-style:none; margin:0; padding:0; display:flex; gap:20px }
-    .navbar a{ color:#fff; text-decoration:none; font-weight:600 }
-
-    .titlebox{ padding:36px 16px 8px; text-align:center; }
-    .titlebox h1{ margin:0; font-size:56px; color:#8a0f0a; }
-    .titlebox h2{ margin:8px 0 0; font-size:24px; color:#777; }
-
-    /* Preview card */
-    .preview-wrap{ display:flex; justify-content:center; padding:22px 16px 60px; }
-    .preview-card{
-      position:relative;
-      width:min(940px, 94vw);
-      background:var(--card-bg);
-      border:1px solid var(--border);
-      border-radius:20px;
-      box-shadow:var(--shadow);
-      overflow:hidden;
-    }
-    .preview-head{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:12px 14px; border-bottom:1px solid var(--border);
-      background:#fafafa; font-weight:700; color:#333;
-    }
-    .preview-open{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:7px 10px; border:1px solid var(--border);
-      border-radius:10px; background:#fff; cursor:pointer; text-decoration:none; color:#1f1f1f;
-      font-weight:600;
-    }
-    .preview-open:hover{ background:#f3f3f3 }
-
-    .iframe-box{
-      position:relative;
-      height:440px;              /* bigger so it doesn't look squished */
-      overflow:hidden;
-      background:#fff;
-    }
-    .iframe-box iframe{
-      width:100%; height:100%;
-      border:0; overflow:hidden;
+    .theme-dark {
+      --uo-sand: #111213;
+      --uo-ink: #e8e8e8;
+      --card-bg: #1b1b1c;
+      --border: #2a2a2a;
     }
 
-    /* Transparent mask makes preview NON-interactive */
-    .preview-mask{
-      position:absolute; inset:0;
-      pointer-events:auto;               /* capture clicks so calendar doesn't */
-      background:transparent;
-      cursor:default;
+    body {
+      background: url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Crect width='400' height='400' fill='%23ffffff'/%3E%3Cg transform='rotate(25 200 100)'%3E%3Crect x='50' y='50' width='100' height='140' fill='%23ef5350' rx='4'/%3E%3Crect x='55' y='55' width='90' height='4' fill='%23ffcdd2'/%3E%3C/g%3E%3Cg transform='rotate(-15 300 150)'%3E%3Crect x='250' y='80' width='120' height='160' fill='%23e53935' rx='4'/%3E%3Crect x='255' y='85' width='110' height='4' fill='%23ffcdd2'/%3E%3C/g%3E%3Cg transform='rotate(10 100 300)'%3E%3Crect x='40' y='250' width='110' height='150' fill='%23c62828' rx='4'/%3E%3Crect x='45' y='255' width='100' height='4' fill='%23ffcdd2'/%3E%3C/g%3E%3Cg transform='rotate(-20 320 280)'%3E%3Crect x='280' y='260' width='90' height='130' fill='%23ef5350' rx='4'/%3E%3Crect x='285' y='265' width='80' height='4' fill='%23ffcdd2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") #fff;
+      background-size: 400px 400px;
+      color: var(--uo-ink);
     }
 
-    /* Hide any old bottom “Calendar” button section from old CSS if it exists */
-    .container, .calendarbox { display:none !important; }
+    .page-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(255, 255, 255, 0.9);
+      z-index: 0;
+    }
+    .navbar, .titlebox, .preview-wrap { position: relative; z-index: 1; }
+    .titlebox { padding: 36px 16px 8px; text-align: center; }
+    .titlebox h1 { margin: 0; font-size: 56px; color: #8a0f0a; }
+    .titlebox h2 { margin: 8px 0 0; font-size: 24px; color: #777; }
+    .preview-wrap { 
+      display: flex; 
+      justify-content: center; 
+      padding: 22px 16px 60px; 
+    }
+    .preview-card {
+      position: relative;
+      width: min(940px, 94vw);
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      padding: 20px;
+    }
+    #calendar-preview { width: 100%; }
+    .calendar-header {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--uo-garnet);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .calendar-dow, .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+    }
+    .calendar-dow {
+      text-align: center;
+      font-weight: 600;
+      color: var(--uo-ink);
+      margin-bottom: 10px;
+    }
+    .calendar-day {
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+      border-radius: 8px;
+      background: #fafafa;
+      position: relative;
+    }
+    .calendar-day.today {
+      background: var(--uo-garnet);
+      color: white;
+    }
+    .event-indicator {
+      position: absolute;
+      bottom: 4px;
+      font-size: 11px;
+      background: var(--uo-garnet-700);
+      color: white;
+      border-radius: 10px;
+      padding: 2px 6px;
+      line-height: 1;
+    }
+    .view-full-calendar {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      padding: 10px;
+      background: var(--uo-garnet);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+    .view-full-calendar:hover { background: var(--uo-garnet-700); }
   </style>
 </head>
 <body>
+  <!-- Background overlay -->
+  <div class="page-overlay"></div>
 
   <nav class="navbar">
     <div class="nav_container">
@@ -85,6 +125,7 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="team.html">About Us</a></li>
         <li><a href="ProductFeatures.html">Product Features</a></li>
+        <li><a href="calendar.html">Calendar</a></li>
       </ul>
     </div>
   </nav>
@@ -94,26 +135,140 @@
     <h2 class="bottomtext">uOttawa</h2>
   </div>
 
-  <!-- CALENDAR PREVIEW (non-interactive) -->
+  <!-- CALENDAR PREVIEW -->
   <section class="preview-wrap">
     <div class="preview-card" aria-label="Calendar preview">
-      <div class="preview-head">
-        <span>Calendar</span>
-        <a class="preview-open" href="calendar.html" title="Open full calendar">
-          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M7 3H3v4h2V5h2V3zm12 0h-4v2h2v2h2V3zM5 17H3v4h4v-2H5v-2zm14 2h-2v2h4v-4h-2v2z" fill="currentColor"/>
-          </svg>
-          Open
-        </a>
-      </div>
-
-      <div class="iframe-box">
-        <iframe src="calendar.html" scrolling="no"></iframe>
-        <!-- This layer blocks interaction with the embedded calendar -->
-        <div class="preview-mask" aria-hidden="true"></div>
-      </div>
+      <div id="calendar-preview"></div>
+    </div>
+    <div class="button-container">
+      <a href="login.html" class="action-btn login-btn">Login</a>
+      <a href="register.html" class="action-btn register-btn">Register</a>
     </div>
   </section>
 
+  <style>
+    .preview-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 22px 16px 60px;
+    }
+    .preview-card {
+      width: min(500px, 94vw);
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      padding: 20px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #calendar-preview {
+      max-width: 300px;
+      margin: 0 auto 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .button-container {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .action-btn {
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .login-btn {
+      background-color: var(--uo-garnet);
+      color: white;
+    }
+    .login-btn:hover {
+      background-color: var(--uo-garnet-700);
+    }
+    .register-btn {
+      background-color: white;
+      color: var(--uo-garnet);
+      border: 2px solid var(--uo-garnet);
+    }
+    .register-btn:hover {
+      background-color: var(--uo-garnet);
+      color: white;
+    }
+    #plandit-mascot {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 100px;
+      text-align: center;
+      cursor: pointer;
+      z-index: 9999;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    #mascot-bubble {
+      display: none;
+      background: #f0f4ff;
+      color: #222;
+      border-radius: 14px;
+      padding: 10px 14px;
+      font-size: 14px;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      max-width: 200px;
+    }
+    #plandit-mascot:hover #mascot-img {
+      transform: scale(1.1);
+      transition: transform 0.2s ease;
+    }
+    .theme-dark #mascot-bubble {
+      background: #2a2a2a;
+      color: #e8e8e8;
+    }
+  </style>
+
+  <!-- Add the home calendar script -->
+  <script src="home-calendar.js"></script>
+
+  <!-- Theme toggle functionality removed from home page -->
+
+  <!-- Mascot -->
+  <div id="plandit-mascot">
+    <div id="mascot-bubble">Hey there! Need help getting started?</div>
+    <div id="mascot-img" style="font-size: 60px;">🦖</div>
+  </div>
+
+  <script>
+    (function() {
+      var mascot = document.getElementById('plandit-mascot');
+      var bubble = document.getElementById('mascot-bubble');
+      var tips = [
+        "Welcome to Plandit",
+        "Plan your schedule",
+        "Register for full access",
+        "Check our features",
+        "Meet our team",
+        "Login to start",
+        "Sign up today",
+        "Plan smarter"
+      ];
+      
+      var visible = false;
+      mascot.onclick = function() {
+        if (visible) {
+          bubble.style.display = 'none';
+        } else {
+          bubble.style.display = 'block';
+          bubble.textContent = tips[Math.floor(Math.random() * tips.length)];
+        }
+        visible = !visible;
+      };
+    })();
+  </script>
 </body>
 </html>
